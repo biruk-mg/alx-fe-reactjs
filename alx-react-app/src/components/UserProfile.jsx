@@ -14,7 +14,7 @@ const UserProfile = (props) => {
 // Define PropTypes
 UserProfile.propTypes = {
     name: PropTypes.string.isRequired,
-    age: PropTypes.string.isRequired,
+    age: PropTypes.number.isRequired,
     bio: PropTypes.string.isRequired,
 };
 
