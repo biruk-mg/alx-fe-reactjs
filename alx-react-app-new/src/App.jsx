@@ -3,7 +3,7 @@ import WelcomeMessage from './components/WelcomeMessage';
 import Header from './components/Header';
 import MainContent from './components/MainContent';
 import Footer from './components/Footer';
-
+import Counter from './components/Counter';
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
@@ -28,6 +28,7 @@ function App() {
       <MainContent />
       <Footer />
       <UserProfile name="Alice" age={25} bio="Loves hiking and photography" />
+      <Counter />
     </div>
       <h1>Vite + React</h1>
       <div className="card">
