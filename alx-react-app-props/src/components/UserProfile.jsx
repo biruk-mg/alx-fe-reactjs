@@ -1,5 +1,5 @@
 // src/components/UserProfile.jsx
-import React, { useContext } from 'react'; // Importing React and useContext
+import  { useContext } from 'react'; // Importing React and useContext
 import UserContext from '../UserContext';  // Importing UserContext
 
 function UserProfile() {
