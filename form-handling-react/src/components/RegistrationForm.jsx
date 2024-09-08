@@ -69,7 +69,7 @@ function RegistrationForm() {
         <input
           type="text"
           name="username"
-          value={formData.username}
+          value={formData.username}  // Corrected: Bind value to state
           onChange={handleChange}
           className="border rounded p-2 w-full"
         />
@@ -80,7 +80,7 @@ function RegistrationForm() {
         <input
           type="email"
           name="email"
-          value={formData.email}
+          value={formData.email}  // Corrected: Bind value to state
           onChange={handleChange}
           className="border rounded p-2 w-full"
         />
@@ -91,7 +91,7 @@ function RegistrationForm() {
         <input
           type="password"
           name="password"
-          value={formData.password}
+          value={formData.password}  // Corrected: Bind value to state
           onChange={handleChange}
           className="border rounded p-2 w-full"
         />
