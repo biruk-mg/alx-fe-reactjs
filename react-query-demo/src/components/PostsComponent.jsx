@@ -1,3 +1,4 @@
+
 import { useQuery } from 'react-query';
 
 // Function to fetch posts from JSONPlaceholder API
@@ -12,13 +13,13 @@ const fetchPosts = async () => {
 // Component to display posts
 function PostsComponent() {
   // Using useQuery to fetch data
-  const { data, error, isLoading, refetch } = useQuery('posts', fetchPosts);
+  const { data, error, isLoading, isError, refetch } = useQuery('posts', fetchPosts);
 
   // Handling loading state
   if (isLoading) return <div>Loading...</div>;
 
   // Handling error state
-  if (error) return <div>Error: {error.message}</div>;
+  if (isError) return <div>Error: {error.message}</div>;
 
   return (
     <div>
