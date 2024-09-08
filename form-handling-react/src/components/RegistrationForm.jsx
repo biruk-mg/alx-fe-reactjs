@@ -1,11 +1,9 @@
 import { useState } from 'react';
 
 function RegistrationForm() {
-  const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: ''
-  });
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const [errors, setErrors] = useState({
     username: '',
@@ -15,10 +13,13 @@ function RegistrationForm() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
+    if (name === 'username') {
+      setUsername(value);
+    } else if (name === 'email') {
+      setEmail(value);
+    } else if (name === 'password') {
+      setPassword(value);
+    }
   };
 
   const handleSubmit = (e) => {
@@ -28,20 +29,20 @@ function RegistrationForm() {
     let hasError = false;
     let errors = {};
 
-    if (!formData.username) {
+    if (!username) {
       errors.username = 'Username is required';
       hasError = true;
     }
 
-    if (!formData.email) {
+    if (!email) {
       errors.email = 'Email is required';
       hasError = true;
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
       errors.email = 'Email is invalid';
       hasError = true;
     }
 
-    if (!formData.password) {
+    if (!password) {
       errors.password = 'Password is required';
       hasError = true;
     }
@@ -52,13 +53,11 @@ function RegistrationForm() {
     }
 
     // Submit data (mock API call)
-    console.log('Form data submitted:', formData);
+    console.log('Form data submitted:', { username, email, password });
     // Reset form
-    setFormData({
-      username: '',
-      email: '',
-      password: ''
-    });
+    setUsername('');
+    setEmail('');
+    setPassword('');
     setErrors({});
   };
 
@@ -69,7 +68,7 @@ function RegistrationForm() {
         <input
           type="text"
           name="username"
-          value={formData.username}  // Corrected: Bind value to state
+          value={username}  // Corrected: Directly use destructured variable
           onChange={handleChange}
           className="border rounded p-2 w-full"
         />
@@ -80,7 +79,7 @@ function RegistrationForm() {
         <input
           type="email"
           name="email"
-          value={formData.email}  // Corrected: Bind value to state
+          value={email}  // Corrected: Directly use destructured variable
           onChange={handleChange}
           className="border rounded p-2 w-full"
         />
@@ -91,7 +90,7 @@ function RegistrationForm() {
         <input
           type="password"
           name="password"
-          value={formData.password}  // Corrected: Bind value to state
+          value={password}  // Corrected: Directly use destructured variable
           onChange={handleChange}
           className="border rounded p-2 w-full"
         />
