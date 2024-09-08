@@ -1,4 +1,3 @@
-
 import { useQuery } from 'react-query';
 
 // Function to fetch posts from JSONPlaceholder API
@@ -12,8 +11,21 @@ const fetchPosts = async () => {
 
 // Component to display posts
 function PostsComponent() {
-  // Using useQuery to fetch data
-  const { data, error, isLoading, isError, refetch } = useQuery('posts', fetchPosts);
+  // Using useQuery with advanced options
+  const { 
+    data, 
+    error, 
+    isLoading, 
+    isError, 
+    refetch, 
+    isFetching, 
+    isSuccess 
+  } = useQuery('posts', fetchPosts, {
+    cacheTime: 1000 * 60 * 5, // Cache data for 5 minutes
+    staleTime: 1000 * 60,     // Consider data fresh for 1 minute
+    refetchOnWindowFocus: true, // Refetch data when the window regains focus
+    keepPreviousData: true    // Keep previous data while fetching new data
+  });
 
   // Handling loading state
   if (isLoading) return <div>Loading...</div>;
@@ -30,15 +42,19 @@ function PostsComponent() {
       >
         Refetch Data
       </button>
+      {/* Displaying fetching state */}
+      {isFetching && <div>Fetching new data...</div>}
       {/* Displaying fetched posts */}
-      <ul>
-        {data.map(post => (
-          <li key={post.id} className="mb-2 p-4 border rounded shadow-sm">
-            <h3 className="font-bold">{post.title}</h3>
-            <p>{post.body}</p>
-          </li>
-        ))}
-      </ul>
+      {isSuccess && (
+        <ul>
+          {data.map(post => (
+            <li key={post.id} className="mb-2 p-4 border rounded shadow-sm">
+              <h3 className="font-bold">{post.title}</h3>
+              <p>{post.body}</p>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
