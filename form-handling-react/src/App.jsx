@@ -1,5 +1,4 @@
-import FormikForm from './components/FormikForm';
-
+import FormikForm from "./components/FormikForm";
 function App() {
   return (
     <div className="App">
