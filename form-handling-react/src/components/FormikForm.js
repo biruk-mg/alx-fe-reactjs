@@ -1,29 +1,26 @@
-// src/components/FormikForm.js
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
 // Validation schema
 const validationSchema = Yup.object({
   username: Yup.string().required('Username is required'),
-  email: Yup.string().email('Email is invalid').required('Email is required'),
+  email: Yup.string().email('Invalid email format').required('Email is required'),
   password: Yup.string().required('Password is required')
 });
 
 function FormikForm() {
-  const handleSubmit = (values, { resetForm }) => {
-    // Submit data (mock API call)
-    console.log('Form data submitted:', values);
-    // Reset form
-    resetForm();
-  };
-
   return (
     <Formik
       initialValues={{ username: '', email: '', password: '' }}
       validationSchema={validationSchema}
-      onSubmit={handleSubmit}
+      onSubmit={(values, { resetForm }) => {
+        // Submit data (mock API call)
+        console.log('Form data submitted:', values);
+        // Reset form
+        resetForm();
+      }}
     >
-      {() => (
+      {({ isSubmitting }) => (
         <Form className="max-w-md mx-auto p-4 border rounded shadow-md">
           <div className="mb-4">
             <label className="block text-gray-700">Username</label>
@@ -52,7 +49,11 @@ function FormikForm() {
             />
             <ErrorMessage name="password" component="p" className="text-red-500" />
           </div>
-          <button type="submit" className="bg-blue-500 text-white p-2 rounded">
+          <button
+            type="submit"
+            className="bg-blue-500 text-white p-2 rounded"
+            disabled={isSubmitting}
+          >
             Register
           </button>
         </Form>
